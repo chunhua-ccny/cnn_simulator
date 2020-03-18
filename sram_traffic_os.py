@@ -28,8 +28,10 @@ def sram_traffic(
     num_ofmap_px = E_h * E_w * num_filt
     e2  = E_h * E_w
     e2m = num_ofmap_px
-    
+        
     # Variables to calculate folds in runtime
+    # dch, the number of runs is very straightforward in this benchmark
+    # each column is dealing with each filter, each row deal with each output pixel
     num_h_fold = math.ceil(e2/dimension_rows)
     num_v_fold = math.ceil(num_filt/dimension_cols)
 
@@ -421,10 +423,10 @@ def gen_write_trace(
 
 if __name__ == "__main__":
    sram_traffic(
-       dimension_rows = 8,
-       dimension_cols = 4,
-       ifmap_h = 7, ifmap_w = 7,
-       filt_h = 2, filt_w = 2,
-       num_channels = 1, strides = 1,
-       num_filt = 7
+       dimension_rows = 16,
+       dimension_cols = 16,
+       ifmap_h = 224, ifmap_w = 224,
+       filt_h = 3, filt_w = 3,
+       num_channels = 3, strides = 1,
+       num_filt = 64
    )
